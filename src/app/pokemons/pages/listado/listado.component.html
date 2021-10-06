@@ -11,16 +11,17 @@
          *ngFor="let pokemon of pokemons; let i=index">
 
         <mat-card>
-                <img mat-card-image [src]="pokemon.sprites.other.dream_world.front_default" alt="pokemon sprite">
                 <mat-card-header>
-                    <mat-card-title>{{ pokemon.name }}</mat-card-title>
+                    <div mat-card-avatar class="avatar" style="background-image: url('{{pokemon.sprites.front_default}}'); background-size: cover;"></div>
+                    <mat-card-title>{{ pokemon.name | titlecase}}</mat-card-title>
                     <mat-card-subtitle>
-                        <span>{{pokemon.types[0].type.name}}</span>
-                        <br>
-                        <span *ngIf="pokemon.types.length>1">{{pokemon.types[1].type.name}}</span>
+                        <span>{{pokemon.types[0].type.name }}</span>
+                        <span *ngIf="pokemon.types.length>1">, {{pokemon.types[1].type.name}}</span>
                     </mat-card-subtitle>
                 </mat-card-header>
-        
+                <br>
+                <img mat-card-image [src]="pokemon.sprites.other.dream_world.front_default" alt="pokemon sprite">
+                <hr>
                 <mat-card-content>
                     <p>
                         <strong>Vida: </strong>{{pokemon.stats[0].base_stat}} <br>

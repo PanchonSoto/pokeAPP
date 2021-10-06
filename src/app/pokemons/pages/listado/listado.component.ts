@@ -6,12 +6,19 @@ import { PokemonsService } from './../../services/pokemons.service';
   selector: 'app-listado',
   templateUrl: './listado.component.html',
   styles: [`
-    img {
-      width: 320px;
-      height: 320px;
-    }
+  
     mat-card {
       margin-top: 20px;
+      height:620px;
+    }
+
+    img{
+      height:400px;
+    }
+
+    .avatar{
+      height: 80px;
+      width: 80px;
     }
   `
   ]
@@ -19,24 +26,28 @@ import { PokemonsService } from './../../services/pokemons.service';
 export class ListadoComponent implements OnInit {
 
   pokemons:Pokemon[]=[];
-  pokemonsO: Pokemon[]=[];
 
   constructor(private pService: PokemonsService ) { }
 
   ngOnInit(): void {
 
-    for(let i=1; i<=20; i++){
+    for(let i=1; i<=Math.floor(Math.random() * 444 + 1); i++){
       
       this.pService.getPokemon(i)
         .subscribe(pokemon=>{
            this.pokemons.push(pokemon);
         });
-    }
 
+    }  
     
+    this.order();
   }
 
-
+order(){
+  this.pokemons.sort(function(a, b) {
+    return (a.id) - (b.id);
+});
+}
 
 }
 
